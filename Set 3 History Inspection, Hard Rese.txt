@@ -1,0 +1,160 @@
+Set 3: History Inspection, Hard Resets, and Merge Conflicts
+I. Initialize a new local Git repository named CalculatorApp. Create a file named math functions.txt,
+add the text Base Logic, and make an initial commit to establish the master branch.
+
+
+mkdir CalculatorApp
+cd CalculatorApp
+git init
+echo "math func by sas">math_functions.txt
+echo joy bangla >"math_functions.txt"
+git add "math_functions.txt"
+git commit -m "initial commit "
+
+
+II. Create a new branch named advanced-math and switch to it.
+
+git branch advanced-math
+git switch "advanced-math"
+
+III. Open math functions.txt, replace the text with Multiplication Logic, and commit
+the change with the message “Add multiplication”.
+
+
+echo text with Multiplication Logic by sa>"math_functions.txt"
+
+
+
+IV. Open the same file, replace the text with Divide by Zero Logic, and commit with the
+message “Add experimental division”.
+
+echo devide by zero>"math_functions.txt"
+git add "math_functions.txt"
+git commit -m "Add experimental division"
+
+
+V. You realize the division logic is completely broken. Use the appropriate Git command to
+view your commit log and find the exact commit hash (code) for the “Add multiplication”
+commit.
+git log --oneline
+
+
+VI. Perform a hard reset using that commit hash. This will permanently erase the experi-
+mental division commit and revert your file back to the multiplication state.
+
+git reset --hard 01100aa
+git log --oneline
+
+
+VII. Switch back to the master branch. Open math functions.txt, replace the text with
+Addition Logic, and commit with the message “Add addition”.
+
+git switch "master"
+echo Addition Logic>"math_functions.txt"
+git commit -m "Add addition"
+
+
+
+type notes.txt
+
+
+
+
+VIII. advanced-math merge করো
+
+Master branch-এই আছো নিশ্চিত হও:
+
+git branch
+
+তারপর:
+
+git merge advanced-math
+
+এখানে merge conflict হবে।
+
+কারণ:
+
+Master branch:
+Addition Logic
+advanced-math branch:
+Multiplication Logic
+
+দুই branch-ই একই line পরিবর্তন করেছে।
+
+Git এমন কিছু দেখাবে:
+
+CONFLICT (content): Merge conflict in math functions.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+এটা normal। ভয় পাওয়ার কিছু নেই।
+
+IX. Conflict Resolve করা
+
+এখন:
+
+notepad "math functions.txt"
+
+দাও।
+
+Notepad-এ তুমি এরকম দেখতে পারো:
+
+<<<<<<< HEAD
+Addition Logic
+=======
+Multiplication Logic
+>>>>>>> advanced-math
+
+এগুলো Git-এর conflict markers।
+
+তোমার assignment বলছে:
+
+keep both the addition and multiplication logic
+
+তাই সব conflict marker মুছে file-এ রাখো:
+
+Addition Logic
+Multiplication Logic
+
+অর্থাৎ final file:
+
+Addition Logic
+Multiplication Logic
+
+তারপর Save করে Notepad বন্ধ করো।
+
+Stage the resolved file
+git add "math functions.txt"
+
+Check:
+
+git status
+
+Git বলবে conflict resolved এবং merge commit-এর জন্য ready।
+
+Finalize the merge
+git commit -m "Merge advanced-math with addition"
+
+ব্যস। Merge complete। ✅
+
+Final Verification
+git status
+
+সাধারণত:
+
+nothing to commit, working tree clean
+
+তারপর:
+
+git log --oneline --all --graph
+
+তোমার history মোটামুটি এমন হবে:
+
+*   abc1234 Merge advanced-math with addition
+|\
+| * a12bc34 Add multiplication
+|/
+* d45ef67 Add addition
+* 7d1ed6e Initial commit
+
+Hashগুলো অবশ্যই তোমার নিজের হবে।
+

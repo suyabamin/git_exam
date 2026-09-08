@@ -1,0 +1,58 @@
+I. Initialize a new local Git repository in a directory named Nexus-Portal.
+
+mkdir Nexus-Portal
+cd Nexus-Portal
+git init
+
+
+II. Set your username to NexusDev and your email to dev@nexus.com globally.
+
+git config --global user.name "NexusDev"
+git config --global user.email "dev@nexus.com"
+
+git config --global user.name
+git config --global user.email
+
+
+
+III. Create a new file named global layout.css. Stage the file.
+echo "global_layout">global_layout.css
+git add "global_layout.css"
+git status
+
+IV. Before you can commit, you receive an urgent request. Use Git to temporarily shelf (stash)
+your uncommitted changes.
+git commit -m "Initial commit"
+
+echo /* Global Layout */ > "global layout.css"
+git status
+git stash
+git status
+
+
+
+V. Create a new branch named hotfix-sata, switch to it, add a file named sata hdd fix.js,
+and commit with the message “Fix SATA HDD external drive read error”.
+
+echo "sata hdd fix.js">sata_hdd_fix.js
+git branch hotfix-sata
+git switch master
+git commit -m "Fix SATA HDD external drive read error"
+
+
+VI. Switch back to the master branch and merge the hotfix-sata branch.
+
+
+git switch master
+git merge hotfix-sat
+
+
+VII. Retrieve and apply your temporarily stashed changes, then commit global layout.css.
+
+git stash pop
+git add "global layout.css"
+git commit -m "Add global layout stylesheet"
+
+
+
+

@@ -1,0 +1,71 @@
+Set 2: Soft Resets, Reverts, and Branch Management
+
+I. Initialize a new local Git repository named Hospital-System and create an initial commit
+with a readme.md file to establish the master branch.
+
+cd Hospital-System
+git initgit init
+echo "read me file by sa">readme.md
+git add "readme.md"
+git commit -m "innatial commit"
+
+
+
+II. Create two new branches named feature-patient-reg and feature-doctor-select.
+
+git branch feature-patient-reg
+git branch feature-doctor-select
+git bracnch
+
+
+
+III. Move to the branch feature-patient-reg, add a file named self register.html, and
+commit with the message “Add ptiant interface”.
+
+
+git switch "feature-patient-reg"
+git brach
+echo "self register by sh">self register.html
+git add "self_register.html"
+git commit -m "Add ptiant interface"
+
+
+
+
+IV. You realize you misspelled “patient” in the commit message. Perform a soft reset to go
+back one commit while keeping your files staged, then recommit with the correct message
+“Add patient interface”.
+
+Soft Reset করে commit message ঠিক করা
+
+git reset --soft HEAD~1
+git commit -m"aadd patient interface"
+git log --oneline
+
+
+
+V. Move to the branch feature-doctor-select, add a file named select logic.js, and
+commit with the message “Add doctor selection logic”.
+
+git switch "feature-doctor-select"
+
+echo "select logic" >select_logic.js
+git add "select logic.js"
+echo "select logic" >select_logic.js
+
+
+
+
+VI. You test the code and realize select logic.js breaks the routing. Revert the commit
+that added this file without rewriting the commit history.
+
+git revert --no-edit HEAD
+
+
+VII. Merge both branches back into the master branch.
+
+git switch master
+git merge "feature-doctor-select"
+git merge "feature-patient-reg"
+git log --oneline --all --graph
+
